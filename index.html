@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Covid API fetching</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        text-align: center;
+        background: #eee;
+      }
+      .container-fluid {
+        height: 12rem;
+        background: #eee;
+        padding: 3rem;
+        margin-top: 3rem;
+      }
+      .home {
+        background: rgb(89, 89, 247);
+      }
+      .wash {
+        background: rgb(240, 86, 86);
+      }
+      .vaccine {
+        background: rgb(60, 146, 60);
+        color: black;
+      }
+      .first {
+        background: rgb(188, 136, 224);
+      }
+      .second {
+        background: lightblue;
+      }
+      .spin-style {
+        display: none;
+        position: absolute;
+        height: 4rem;
+        width: 4rem;
+        top: 50%;
+        bottom: 50%;
+        z-index: 1;
+      }
+      .err-msg {
+        color: red;
+        display: none;
+      }
+      #getCountry {
+        width: 350px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2><u>Data of Covid cases for all countries in the world</u></h2>
+      <button type="button" class="btn btn-primary" onclick="fetchAllData()">
+        Get All countries Data
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        onclick="getConfirmedCases()"
+      >
+        Confirmed Cases
+      </button>
+      <button
+        type="button"
+        class="btn btn-success"
+        onclick="getRecoveredCases()"
+      >
+        Recovered cases
+      </button>
+      <button type="button" class="btn btn-danger" onclick="getDeathCount()">
+        Deaths
+      </button>
+
+      <!-- Button trigger modal -->
+      <!-- Button trigger modal -->
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Get Countrwise Data
+      </button>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Enter a valid country name below
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <input
+                id="getCountry"
+                type="text"
+                placeholder="enter valid country start with Capital letter"
+              />
+              <h5 class="err-msg">
+                *Enter Valid country name starting with Capital letter
+              </h5>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-dismiss="modal"
+                onclick="getCountryWiseData()"
+              >
+                Get Data
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main body data -->
+    <div id="dataplace">
+      <!-- adding spinner to load -->
+      <div class="spinner-border text-primary spin-style" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="container-fluid first">
+        <h2>4,010,636 people have died.</h2>
+        That's a 2% mortality rate. In comparison, the death rate from seasonal
+        flu is typically around 0.1% in the U.S., according to The New York
+        Times.
+      </div>
+      <div class="container-fluid second">
+        <h2>As of today, 1,284,370 more people are expected to die.</h2>
+        Using the mortality rate, this many people are expected to die from
+        Coronavirus in the coming weeks. Some cases of Coronavirus are not
+        reported, which means the actual mortality rate may be lower.
+      </div>
+      <div class="container-fluid home">
+        <h2>Stay at Home</h2>
+        <h5>
+          The best way to prevent the spread of the disease is to stay at home.
+        </h5>
+        <button type="button" class="btn btn-danger">
+          Read the WHO Recommendations
+        </button>
+      </div>
+      <div class="container-fluid wash">
+        <h2>Wash your hands</h2>
+        <h5>
+          Wash your hands with soap regularly to prevent the spread of the
+          disease.
+        </h5>
+        <button type="button" class="btn btn-primary">
+          Read the WHO Recommendations
+        </button>
+      </div>
+      <div class="container-fluid vaccine">
+        <h2><u>Get Vaccinate Soon</u></h2>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="covidAPI.js"></script>
+  </body>
+</html>
